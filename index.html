@@ -6,16 +6,47 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <link rel="stylesheet" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     </head>
     <body>
         <header>
             <nav>
                 <ul>
-                    <li>Notatki</li>
-                    <li>Dodaj Notatke</li>
-                    <li>Zaloguj</li>
+                    <li id="li1">Notatki</li>
+                    <li id="li2">Szukaj notatki</li>
+                    <!-- <?php
+                    if($_SESSION['login'] == 1)
+                    { -->
+                    <li id="li3">Dodaj Notatke</li>
+                    <!-- } -->
+                    <li id="li4">Zaloguj</li>
                 </ul>
             </nav>
         </header>
+        <h1 class="top-title">Wspólny zeszyt kadetów GSR!!</h1>
+        <div class="hide" id="1">
+            <h2>Notatki</h2>
+            <!-- <?php include('notatki.php'); ?> -->
+        </div>
+        <div class="hide" id="2">
+            <h2>Szukaj  notatki</h2>
+            <!-- <?php include('szukaj_notatki.php'); ?> -->
+        </div>
+        <div class="hide" id="3">
+            <h2>Dodaj notatke</h2>
+            <!-- <?php include('notatki-add.php'); ?> -->
+        </div>
+        <div class="hide" id="4">
+            <h2>Zaloguj</h2>
+            <form action="php/login.php" method="post">
+                <label for="login">Login:</label>
+                <input type="text" name="login" id="login">
+                <label for="pass">Haso:</label>
+                <input type="text" name="pass" id="pass">
+                <input type="submit" value="Zaloguj">
+            </form>
+        </div>
     </body>
 </html>
+<script src="js/class.js"></script>

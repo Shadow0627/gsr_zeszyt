@@ -9,9 +9,7 @@ header
     color: white;
     background-color: rgb(0, 140, 255);
     width: 100%;
-    display: fixed;
-    top: 0px;
-    left: 0px;
+
 }
 header nav ul
 {
@@ -22,10 +20,19 @@ header nav ul
    justify-content: center;
    padding-top: 5vh;
    padding-bottom: 5vh;
-
+   margin: 0px !important;
 }
 header nav ul li
 {
     display: inline;
     margin-right: 5vw;
-} 
+    cursor: pointer;
+}
+.top-title
+{
+    width: 100%;
+    margin-top: 20vh;
+    font-size: xx-large;
+    font-weight: 900;
+    text-align: center;
+}

@@ -1,0 +1,12 @@
+ $("#li1").click(function(){
+    $("#1").toggle("slow");
+ });
+ $("#li2").click(function(){
+    $("#2").toggle("slow");
+ });
+ $("#li3").click(function(){
+    $("#3").toggle("slow");
+ });
+ $("#li4").click(function(){
+    $("#4").toggle("slow");
+ });
