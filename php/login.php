@@ -1,39 +1,22 @@
 <?php
-class login{
+class login
+{
     public $nick;
-    public $pass;
-    public function con()
+    private $pass;
+    public function __construct($nick, $pass)
     {
-        $servername = "fdb22.awardspace.net";
-$username = "2826309_db";
-$password = "1qaz2wsXX";
-
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=2826309_db", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->nick = $nick;
+        $this->pass = $pass;
     }
-catch(PDOException $e)
+    public function check()
     {
-    echo "Connection failed: " . $e->getMessage();
+        
+        return " zalogowano $this->nick o hasle $this->pass";
     }
-
-    }
-    public function logon($nick, $pass)
-    {
-      echo "Hi " .$nick. " your password is: " .$pass. "";
-    }
-    public function end()
-    0
-    {
-        $conn->close();
-    }
-  }
-   $nick = $_POST['login'];
-    $pass = $_POST['pass'];
-$con = new login();
-$con->nick = $nick;
-$con->pass = $pass;
-$con->logon($nick, $pass);
-$con->con();
-$con->end();
+}
+$admin = new login($_POST['login'], $_POST['pass']);
+$user = new login('kocham', 'cie');
+echo $admin->nick . '<br>';
+echo $user->nick . '<br>';
+echo $admin->check();
 ?>
