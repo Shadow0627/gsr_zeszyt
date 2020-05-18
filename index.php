@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="pl">
     <head>
@@ -13,29 +14,38 @@
         <header>
             <nav>
                 <ul>
+                    <?php if($_SESSION['login']==1)
+                    { 
+                        echo "<li>";
+                        echo $_SESSION['imie_nazwisko'];
+                        echo "</li>";
+                    }
+                    ?>
                     <li id="li1">Notatki</li>
                     <li id="li2">Szukaj notatki</li>
-                    <!-- <?php
-                    if($_SESSION['login'] == 1)
-                    { -->
                     <li id="li3">Dodaj Notatke</li>
-                    <!-- } -->
-                    <li id="li4">Zaloguj</li>
+                    <?php if($_SESSION['login']==1)
+                    { 
+                        echo '<li id="li5">Wyloguj</li>';
+                    }
+                    else
+                    {
+                        echo '<li id="li4">Zaloguj</li>';
+                    }
+                    ?>
+                    
                 </ul>
             </nav>
         </header>
         <h1 class="top-title">Wspólny zeszyt kadetów GSR!!</h1>
         <div class="hide" id="1" style = "display: none;">
             <h2>Notatki</h2>
-            <!-- <?php include('notatki.php'); ?> -->
         </div>
         <div class="hide" id="2" style = "display: none;">
             <h2>Szukaj  notatki</h2>
-            <!-- <?php include('szukaj_notatki.php'); ?> -->
         </div>
         <div class="hide" id="3" style = "display: none;">
             <h2>Dodaj notatke</h2>
-            <!-- <?php include('notatki-add.php'); ?> -->
         </div>
         <div class="hide" id="4" style = "display: none;">
             <h2>Zaloguj</h2>
@@ -47,6 +57,30 @@
                 <input type="submit" value="Zaloguj">
             </form>
         </div>
+        <?php if($_SESSION['login']==1)
+                    { 
+                        echo '<div class="hide" id="5" style = "display: none;">
+                        <h2>Wyloguj</h2>
+                        <form class="loginform" action="php/logout.php" method="post">
+                            <input type="submit" value="Wyloguj">
+                        </form>
+                    </div>';
+                    }
+
+                    ?>
     </body>
 </html>
 <script src="js/class.js"></script>
+<?php
+if(isset($_SESSION['logerr']))
+{
+    print('<script>
+    alert(');
+    echo "'";
+     include('php/errorlogin.php');
+      echo "'";
+    print('
+    );
+</script>');
+}
+?>
