@@ -17,7 +17,7 @@
                     <?php if($_SESSION['login']==1)
                     { 
                         echo "<li>";
-                        echo $_SESSION['imie_nazwisko'];
+                        echo 'zalogowano jako: ' . $_SESSION['imie_nazwisko'];
                         echo "</li>";
                     }
                     ?>
@@ -40,12 +40,15 @@
         <h1 class="top-title">Wspólny zeszyt kadetów GSR!!</h1>
         <div class="hide" id="1" style = "display: none;">
             <h2>Notatki</h2>
+            <?php include('php/notatki.php'); ?>
         </div>
         <div class="hide" id="2" style = "display: none;">
             <h2>Szukaj  notatki</h2>
+            <?php include('php/szukaj_notatki.php'); ?>
         </div>
         <div class="hide" id="3" style = "display: none;">
             <h2>Dodaj notatke</h2>
+            <?php include('php/dodaj_notatki.php'); ?>
         </div>
         <div class="hide" id="4" style = "display: none;">
             <h2>Zaloguj</h2>

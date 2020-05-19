@@ -22,11 +22,12 @@ header nav ul
    padding-top: 5vh;
    padding-bottom: 5vh;
    margin: 0px !important;
+   text-transform: capitalize;
 }
 header nav ul li
 {
     display: inline;
-    margin-right: 5vw;
+    margin-right: 2vw;
     cursor: pointer;
 }
 .top-title
@@ -66,4 +67,68 @@ header nav ul li
     text-align: center;
     margin-top: 10vh;
     margin-bottom: 10vh;
+}
+
+.notatka
+{
+    width: 80%;
+    margin-left: 10%;
+    border: 5px solid rgb(0, 140, 255);
+    margin-bottom: 20vh;
+}
+
+.topic
+{
+    width: 100%;
+    text-align: center;
+    text-transform: capitalize;
+}
+.title
+{
+    width:100%;
+    text-align:right;
+    text-transform: capitalize;
+    margin-top: -5vh;
+}
+.author
+{
+    text-transform: capitalize;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.time
+{
+    width: 90%;
+    margin-left: 5%;
+}
+
+.content
+{
+    width: 90%;
+    margin-left: 5%;
+    font-weight: 900;
+}
+
+.content::first-letter
+{
+    text-transform: capitalize;
+}
+
+.szukanie
+{
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+    border: 5px solid rgb(0, 140, 255);
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+
+}
+.postadd
+{
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+    border: 5px solid rgb(0, 140, 255);
 }

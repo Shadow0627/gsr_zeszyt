@@ -32,4 +32,75 @@ class dbh{
             
         }
     }
+
+    public function selectall()
+    {
+        $sql = "SELECT * FROM gsr_zeszyt_notatki ORDER BY id DESC";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+        $rows=$stmt->fetchAll();
+        foreach($rows as $row)
+        {
+            echo'   <section class="notatka">
+                        <div class="topic">
+                            <h1>Temat: ' .$row["temat"]. '</h1>
+                        </div>
+                        <div class="title">
+                            <h2>Tytuł: ' .$row["tytul"]. '</h2>
+                        </div>
+                        <div class="author">
+                            <h3>Autor: ' .$row["autor"]. '</h3>
+                        </div>
+                        <div class="time">
+                            <h4>Czas: ' .$row["data"]. ' ' .$row["godzina"]. '</h4>
+                        </div>
+                        <div class="content">
+                            <pre>' .$row["tresc"]. '</pre>
+                        </div>
+                    </section>
+                ';
+        }
+    }
+
+    public function szukaj($wartosc)
+    {
+        $a = $wartosc;
+        $b = $wartosc;
+        $c = $wartosc;
+        $d = $wartosc;
+        $sql = "SELECT * FROM gsr_zeszyt_notatki WHERE temat LIKE ? OR tytul LIKE ? OR autor LIKE ? OR tresc LIKE ? ORDER BY id ASC";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$a, $b, $c, $d]);
+        $rows=$stmt->fetchAll();
+        foreach($rows as $row)
+        {
+            echo'   <section class="notatka">
+                        <div class="topic">
+                            <h1>Temat: ' .$row["temat"]. '</h1>
+                        </div>
+                        <div class="title">
+                            <h2>Tytuł: ' .$row["tytul"]. '</h2>
+                        </div>
+                        <div class="author">
+                            <h3>Autor: ' .$row["autor"]. '</h3>
+                        </div>
+                        <div class="time">
+                            <h4>Czas: ' .$row["data"]. ' ' .$row["godzina"]. '</h4>
+                        </div>
+                        <div class="content">
+                            <p>' .$row["tresc"]. '</p>
+                        </div>
+                    </section>
+                ';
+        }
+    }
+
+    public function dodaj($temat, $tytul, $tresc, $autor)
+    {
+        $data = date('y-m-d');
+        $time = date('H:i:s');
+        $sql = 'INSERT INTO gsr_zeszyt_notatki (temat, tytul, tresc, autor, data, godzina) VALUES (?, ?, ?, ?, ?, ?)';
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$temat, $tytul, $tresc, $autor, $data, $time]);
+    }
 }
