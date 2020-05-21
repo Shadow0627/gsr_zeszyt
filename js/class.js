@@ -13,3 +13,6 @@
  $("#li5").click(function(){
    $("#5").toggle("slow");
 });
+$("#li6").click(function(){
+   $("#6").toggle("slow");
+});

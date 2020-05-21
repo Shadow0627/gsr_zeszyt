@@ -16,7 +16,7 @@
                 <ul>
                     <?php if($_SESSION['login']==1)
                     { 
-                        echo "<li>";
+                        echo "<li id='li6'>";
                         echo 'zalogowano jako: ' . $_SESSION['imie_nazwisko'];
                         echo "</li>";
                     }
@@ -38,6 +38,10 @@
             </nav>
         </header>
         <h1 class="top-title">Wspólny zeszyt kadetów GSR!!</h1>
+        <div class="hide" id="6" style = "display: none;">
+            <h2>Zarządaj kontem</h2>
+            <?php include('php/user_mod.php'); ?>
+        </div>
         <div class="hide" id="1" style = "display: none;">
             <h2>Notatki</h2>
             <?php include('php/notatki.php'); ?>
