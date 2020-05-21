@@ -41,12 +41,11 @@ class dbh{
         $rows=$stmt->fetchAll();
         foreach($rows as $row)
         {
-            $idd = $row['id'];
-            $sql1 = "SELECT nazwa FROM gsr_zeszyt_pliki WHERE post_id = ?";
-        $stmt1 = $this->connect()->prepare($sql1);
-        $stmt1->execute($idd);
-            $dupa=$stmt1->fetchAll();
-            print_r($dupa);
+            $idpo = $row['id'];
+            $query = "SELECT nazwa FROM gsr_zeszyt_pliki WHERE post_id = ?";
+            $work = $this->connect()->prepare($query);
+            $work->execute([$idpo]);
+            $efect= $work->fetch();
             echo'   <section class="notatka">
                         <div class="topic">
                             <h1>Temat: ' .$row["temat"]. '</h1>
@@ -64,7 +63,10 @@ class dbh{
                             <pre>' .$row["tresc"]. '</pre>
                         </div>
                         <div class="file">
-                            <a href= "/zeszyt/dane/' .$dupa. '" download>Plik</a>
+                        ';  if(!empty($efect['nazwa'])){
+                        echo'   <a href= "/zeszyt/dane/' .$efect['nazwa']. '" download>Plik do teamtu</a>';
+                        }
+                            echo'
                         </div>
                     </section>
                 ';
@@ -120,9 +122,7 @@ class dbh{
         $stmt->execute([$autor]);
         $result = $stmt->fetch();
         $max = $result;
-        // print_r($max['maxx']);
         $maxx = $max['maxx'];
-        // echo $maxx;
         $temp = explode(".", $plik['name']);
         $newfilename = round(microtime(true)) . '.' . end($temp);
         if(move_uploaded_file($plik['tmp_name'], '../dane/' . $newfilename))
@@ -131,9 +131,9 @@ class dbh{
         $time = date('H:i:s');
         $sql = 'INSERT INTO gsr_zeszyt_pliki (nazwa, autor, data, godzina, post_id) VALUES (?, ?, ?, ?, ?)';
         $stmt= $this->connect()->prepare($sql);
-        // print_r("   " . $sql . "  " . $maxx);
         if($stmt->execute([$newfilename, $autor, $data, $time, $maxx]))
         {
+            
         }
         else
         {
