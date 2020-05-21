@@ -1,7 +1,7 @@
 <?php
 if($_SESSION['login'] == 1)
 {
- echo '<form class="postadd" action="php/add.php" method="POST">
+ echo '<form class="postadd" enctype="multipart/form-data" action="php/add.php" method="POST">
  <label for="temat">Temat notatki: </label>
  <input type="text" name="temat" id="temat" require><br><br><br>
  <label for="tytul">Tytuł notatki: </label>

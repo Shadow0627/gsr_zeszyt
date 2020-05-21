@@ -34,13 +34,19 @@ class dbh{
     }
 
     public function selectall()
-    {
+    {   
         $sql = "SELECT * FROM gsr_zeszyt_notatki ORDER BY id DESC";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute();
         $rows=$stmt->fetchAll();
         foreach($rows as $row)
         {
+            $idd = $row['id'];
+            $sql1 = "SELECT nazwa FROM gsr_zeszyt_pliki WHERE post_id = ?";
+        $stmt1 = $this->connect()->prepare($sql1);
+        $stmt1->execute($idd);
+            $dupa=$stmt1->fetchAll();
+            print_r($dupa);
             echo'   <section class="notatka">
                         <div class="topic">
                             <h1>Temat: ' .$row["temat"]. '</h1>
@@ -56,6 +62,9 @@ class dbh{
                         </div>
                         <div class="content">
                             <pre>' .$row["tresc"]. '</pre>
+                        </div>
+                        <div class="file">
+                            <a href= "/zeszyt/dane/' .$dupa. '" download>Plik</a>
                         </div>
                     </section>
                 ';
@@ -99,9 +108,9 @@ class dbh{
     {
         $data = date('y-m-d');
         $time = date('H:i:s');
-        // $sql = 'INSERT INTO gsr_zeszyt_notatki (temat, tytul, tresc, autor, data, godzina) VALUES (?, ?, ?, ?, ?, ?)';
-        // $stmt = $this->connect()->prepare($sql);
-        // $stmt->execute([$temat, $tytul, $tresc, $autor, $data, $time]);
+        $sql = 'INSERT INTO gsr_zeszyt_notatki (temat, tytul, tresc, autor, data, godzina) VALUES (?, ?, ?, ?, ?, ?)';
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$temat, $tytul, $tresc, $autor, $data, $time]);
     }
 
     public function dodajplik($plik, $autor)
@@ -109,22 +118,33 @@ class dbh{
       $sql = 'SELECT MAX(id) AS maxx FROM gsr_zeszyt_notatki WHERE autor = ?';
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$autor]);
-        $result = $stmt->fetchAll();
+        $result = $stmt->fetch();
         $max = $result;
-        $temp = explode(".", $plik["name"]);
+        // print_r($max['maxx']);
+        $maxx = $max['maxx'];
+        // echo $maxx;
+        $temp = explode(".", $plik['name']);
         $newfilename = round(microtime(true)) . '.' . end($temp);
-        if(is_array($plik))
+        if(move_uploaded_file($plik['tmp_name'], '../dane/' . $newfilename))
         {
-            echo $newfilename;
-        }else
+        $data = date('y-m-d');
+        $time = date('H:i:s');
+        $sql = 'INSERT INTO gsr_zeszyt_pliki (nazwa, autor, data, godzina, post_id) VALUES (?, ?, ?, ?, ?)';
+        $stmt= $this->connect()->prepare($sql);
+        // print_r("   " . $sql . "  " . $maxx);
+        if($stmt->execute([$newfilename, $autor, $data, $time, $maxx]))
         {
-            echo "to nie plik !!!! <a href='../index.php>wroc</a>";
         }
-
-
-        // $sql = 'INSERT INTO gsr_zeszyt_pliki (nazwa, data, godzina, post_id) VALUES (?, ?, ?, ?)';
-        // $stmt= $this->connect()->prepare($sql);
-        // $stmt->execute([])
+        else
+        {
+            echo "duupoa !!" . error_get_last();
+        }
+        
+        }
+        else
+        {
+            echo '   <br> dupa    ' . error_get_last() ;
+        }
         
     }
 }
