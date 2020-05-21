@@ -23,6 +23,7 @@ class dbh{
             $row = $stmt->fetch();
             $_SESSION['name'] = $row['nick'];
             $_SESSION['imie_nazwisko'] = $row['imie_nazswisko'];
+            $_SESSION['id'] = $row['id']; 
         }
         else
         {
@@ -133,7 +134,7 @@ class dbh{
         $stmt= $this->connect()->prepare($sql);
         if($stmt->execute([$newfilename, $autor, $data, $time, $maxx]))
         {
-            
+
         }
         else
         {
@@ -146,5 +147,32 @@ class dbh{
             echo '   <br> dupa    ' . error_get_last() ;
         }
         
+    }
+
+    public function zmiennick($nick, $id)
+    {
+    $sql = "UPDATE gsr_zeszyt  SET nick = ? WHERE id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    if($stmt->execute([$nick, $id]))
+        {
+        }
+        else
+        {
+            echo "duupoa !!" . error_get_last();
+        }
+    }
+
+
+    public function zmienpass($pass, $id)
+    {
+        $sql = "UPDATE gsr_zeszyt  SET haslo = ? WHERE id = ?";
+    $stmt = $this->connect()->prepare($sql);
+    if($stmt->execute([$pass, $id]))
+        {
+        }
+        else
+        {
+            echo "duupoa !!" . error_get_last();
+        }
     }
 }

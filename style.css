@@ -23,6 +23,8 @@ header nav ul
    padding-bottom: 5vh;
    margin: 0px !important;
    text-transform: capitalize;
+   font-size: 2vw;
+   width: 90%;
 }
 header nav ul li
 {

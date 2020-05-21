@@ -1,4 +1,5 @@
-<?php session_start() ?>
+<?php session_start();
+?>
 <!DOCTYPE html>
 <html lang="pl">
     <head>
@@ -38,10 +39,7 @@
             </nav>
         </header>
         <h1 class="top-title">Wspólny zeszyt kadetów GSR!!</h1>
-        <div class="hide" id="6" style = "display: none;">
-            <h2>Zarządaj kontem</h2>
-            <?php include('php/user_mod.php'); ?>
-        </div>
+        
         <div class="hide" id="1" style = "display: none;">
             <h2>Notatki</h2>
             <?php include('php/notatki.php'); ?>
@@ -75,6 +73,10 @@
                     }
 
                     ?>
+                    <div class="hide" id="6" style = "display: none;">
+            <h2>Zarządaj kontem</h2>
+             <?php include('php/user_mod.php'); ?>
+        </div>
     </body>
 </html>
 <script src="js/class.js"></script>

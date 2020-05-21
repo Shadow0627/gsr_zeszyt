@@ -2,8 +2,8 @@
 session_start();
 if(isset($_POST['temat']))
 {
-include('../class/db.php'); 
-$notki = new dbh();
+    include('../class/db.php'); 
+    $notki = new dbh();
 $notki->dodaj($_POST['temat'], $_POST['tytul'], $_POST['tresc'], $_SESSION['imie_nazwisko']);
 if(!empty($_FILES['file']['name']))
 {
